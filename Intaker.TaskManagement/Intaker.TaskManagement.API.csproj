@@ -9,12 +9,14 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Intaker.TaskManagement.Application\Intaker.TaskManagement.Application.csproj" />
     <ProjectReference Include="..\Intaker.TaskManagement.Data\Intaker.TaskManagement.Data.csproj" />
     <ProjectReference Include="..\Intaker.TaskManagement.Domain\Intaker.TaskManagement.Domain.csproj" />
+    <ProjectReference Include="..\Intaker.TaskManagement.Infrastructure\Intaker.TaskManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

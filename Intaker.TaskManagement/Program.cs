@@ -1,8 +1,11 @@
+using Azure.Messaging.ServiceBus;
 using Intaker.TaskManagement.Application.Dependencies;
 using Intaker.TaskManagement.Application.Services;
 using Intaker.TaskManagement.Data;
 using Intaker.TaskManagement.Data.Repositories;
+using Intaker.TaskManagement.Domain.Infrastructure;
 using Intaker.TaskManagement.Domain.Services;
+using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,10 @@ builder.Services.RegisterRequestHandlers();
 builder.Services.RegisterAutomapper();
 
 builder.Services.AddScoped<IRepository<Intaker.TaskManagement.Data.Models.Task>, TaskRepository>();
-builder.Services.AddScoped<IQueueService, QueueService>();
+
+builder.Services.AddAzureClients(fb => fb.AddServiceBusClient(builder.Configuration["ServiceBusConnectionString"]));
+builder.Services.AddScoped<IQueueService>(s => 
+    new QueueService(s.GetRequiredService<ServiceBusClient>(), builder.Configuration["QueueName"] ?? string.Empty));
 
 var app = builder.Build();
 
