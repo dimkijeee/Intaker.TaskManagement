@@ -5,6 +5,14 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intaker.TaskManagement.API", "Intaker.TaskManagement\Intaker.TaskManagement.API.csproj", "{2B167909-D6A8-46D1-ACF7-55A1028C170B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intaker.TaskManagement.Functions", "Intaker.TaskManagement.Functions\Intaker.TaskManagement.Functions.csproj", "{C03EB11B-69B7-4636-A373-0653061AAF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intaker.TaskManagement.Data", "Intaker.TaskManagement.Data\Intaker.TaskManagement.Data.csproj", "{F297CFFD-FE69-49B1-BB2D-4A07C948F329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intaker.TaskManagement.Application", "Intaker.TaskManagement.Application\Intaker.TaskManagement.Application.csproj", "{EC88B4C6-1BC6-44ED-8F48-4CC6DA02EDE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intaker.TaskManagement.Domain", "Intaker.TaskManagement.Domain\Intaker.TaskManagement.Domain.csproj", "{46DE5B6F-9497-41E9-B6A0-54B2CCA71CF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{2B167909-D6A8-46D1-ACF7-55A1028C170B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B167909-D6A8-46D1-ACF7-55A1028C170B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B167909-D6A8-46D1-ACF7-55A1028C170B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03EB11B-69B7-4636-A373-0653061AAF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03EB11B-69B7-4636-A373-0653061AAF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03EB11B-69B7-4636-A373-0653061AAF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03EB11B-69B7-4636-A373-0653061AAF02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F297CFFD-FE69-49B1-BB2D-4A07C948F329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F297CFFD-FE69-49B1-BB2D-4A07C948F329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F297CFFD-FE69-49B1-BB2D-4A07C948F329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F297CFFD-FE69-49B1-BB2D-4A07C948F329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC88B4C6-1BC6-44ED-8F48-4CC6DA02EDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC88B4C6-1BC6-44ED-8F48-4CC6DA02EDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC88B4C6-1BC6-44ED-8F48-4CC6DA02EDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC88B4C6-1BC6-44ED-8F48-4CC6DA02EDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46DE5B6F-9497-41E9-B6A0-54B2CCA71CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46DE5B6F-9497-41E9-B6A0-54B2CCA71CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46DE5B6F-9497-41E9-B6A0-54B2CCA71CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46DE5B6F-9497-41E9-B6A0-54B2CCA71CF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
