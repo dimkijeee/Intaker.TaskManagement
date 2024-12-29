@@ -14,7 +14,7 @@ namespace Intaker.TaskManagement.Data.Repositories
 
         public async Task<Models.Task> Get(int id)
         {
-            return await _context.Tasks.FirstOrDefaultAsync(task => task.Id == id);
+            return await _context.Tasks.FirstAsync(task => task.Id == id);
         }
 
         public async Task<IEnumerable<Models.Task>> GetAll()

@@ -25,7 +25,6 @@ namespace Intaker.TaskManagement.Application.Services
             finally
             {
                 await _serviceBusSender.DisposeAsync();
-                await _serviceBusClient.DisposeAsync();
             }
         }
     }
