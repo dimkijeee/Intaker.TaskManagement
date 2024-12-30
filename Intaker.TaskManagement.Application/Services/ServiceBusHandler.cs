@@ -1,6 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
 using Intaker.TaskManagement.Infrastructure.Models;
-using Microsoft.Azure.Amqp.Framing;
 using Newtonsoft.Json;
 
 namespace Intaker.TaskManagement.Application.Services
@@ -25,8 +24,15 @@ namespace Intaker.TaskManagement.Application.Services
 
         public async Task SendMessage(QueueAction action, object data)
         {
-            await _serviceBusSender.SendMessageAsync(new ServiceBusMessage(
-                new QueueMessage(action, data).ToString()));
+            try
+            {
+                await _serviceBusSender.SendMessageAsync(new ServiceBusMessage(
+                    new QueueMessage(action, data).ToString()));
+            }
+            finally
+            {
+                await _serviceBusSender.DisposeAsync();
+            }
         }
 
         public async Task ProcessMessages()

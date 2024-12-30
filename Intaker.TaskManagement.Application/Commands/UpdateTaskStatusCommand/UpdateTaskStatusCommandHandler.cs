@@ -1,4 +1,4 @@
-﻿using Intaker.TaskManagement.Domain.Infrastructure;
+﻿using Intaker.TaskManagement.Application.Services;
 using Intaker.TaskManagement.Infrastructure.Models;
 using MediatR;
 
@@ -6,14 +6,14 @@ namespace Intaker.TaskManagement.Application.Commands.UpdateTaskStatusCommand
 {
     public class UpdateTaskStatusCommandHandler : IRequestHandler<UpdateTaskStatusCommand>
     {
-        private readonly IQueueService _queueService;
+        private readonly ServiceBusHandler _serviceBusHandler;
 
-        public UpdateTaskStatusCommandHandler(IQueueService queueService)
+        public UpdateTaskStatusCommandHandler(ServiceBusHandler serviceBusHandler)
         {
-            _queueService = queueService;
+            _serviceBusHandler = serviceBusHandler;
         }
 
         public async Task Handle(UpdateTaskStatusCommand request, CancellationToken cancellationToken) =>
-            await _queueService.Enqueue(QueueAction.UpdateTaskStatus, request);
+            await _serviceBusHandler.SendMessage(QueueAction.UpdateTaskStatus, request);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Intaker.TaskManagement.Domain.Infrastructure;
+﻿using Intaker.TaskManagement.Application.Services;
 using Intaker.TaskManagement.Infrastructure.Models;
 using MediatR;
 
@@ -6,14 +6,14 @@ namespace Intaker.TaskManagement.Application.Commands.CreateTaskCommand
 {
     public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand>
     {
-        private readonly IQueueService _queueService;
+        private readonly ServiceBusHandler _serviceBusHandler;
 
-        public CreateTaskCommandHandler(IQueueService queueService)
+        public CreateTaskCommandHandler(ServiceBusHandler serviceBusHandler)
         {
-            _queueService = queueService;
+            _serviceBusHandler = serviceBusHandler;
         }
 
         public async Task Handle(CreateTaskCommand request, CancellationToken cancellationToken) =>
-            await _queueService.Enqueue(QueueAction.CreateTask, request);
+            await _serviceBusHandler.SendMessage(QueueAction.CreateTask, request);
     }
 }
