@@ -37,6 +37,7 @@ namespace Intaker.TaskManagement.Application.Services
             catch
             {
                 // TODO: send notification here
+                throw;
             }
 
             // TODO: send notification here
