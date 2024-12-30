@@ -20,7 +20,7 @@ namespace Intaker.TaskManagement.Functions
 
         [Function(nameof(TaskDequeue))]
         public async Task Run(
-            [ServiceBusTrigger("intaker-tm-tasks", Connection = "ServiceBusConnectionString")]
+            [ServiceBusTrigger("intaker-tm-tasks", Connection = "ServiceBusConnectionString", AutoCompleteMessages = false)]
             ServiceBusReceivedMessage message,
             ServiceBusMessageActions messageActions)
         {

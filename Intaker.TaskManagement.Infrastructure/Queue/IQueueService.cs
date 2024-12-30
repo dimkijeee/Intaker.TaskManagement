@@ -1,6 +1,6 @@
 ﻿using Intaker.TaskManagement.Infrastructure.Models;
 
-namespace Intaker.TaskManagement.Domain.Infrastructure
+namespace Intaker.TaskManagement.Infrastructure.Queue
 {
     public interface IQueueService
     {

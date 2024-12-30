@@ -5,8 +5,9 @@ using Intaker.TaskManagement.Application.Dependencies;
 using Intaker.TaskManagement.Application.Services;
 using Intaker.TaskManagement.Data;
 using Intaker.TaskManagement.Data.Repositories;
-using Intaker.TaskManagement.Domain.Infrastructure;
 using Intaker.TaskManagement.Domain.Services;
+using Intaker.TaskManagement.Infrastructure.Notification;
+using Intaker.TaskManagement.Infrastructure.Queue;
 using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +20,12 @@ builder.Services.RegisterRequestHandlers();
 builder.Services.RegisterAutomapper();
 
 builder.Services.AddScoped<IRepository<Intaker.TaskManagement.Data.Models.Task>, TaskRepository>();
-
 builder.Services.AddAzureClients(fb => fb.AddServiceBusClient(builder.Configuration["ServiceBusConnectionString"]));
+
+builder.Services.AddScoped<INotificationService>(sp => new NotificationService(builder.Configuration
+    .GetSection("NotifySubscribers")
+    .Get<List<string>>()
+    .Select(s => new Uri(s))));
 
 builder.Services.AddScoped<IQueueService>(s => 
     new QueueService(
@@ -29,6 +34,7 @@ builder.Services.AddScoped<IQueueService>(s =>
 
 builder.Services.AddScoped(sp => new TaskActionsMessageHandler(
     sp.GetRequiredService<IRepository<Intaker.TaskManagement.Data.Models.Task>>(),
+    sp.GetRequiredService<INotificationService>(),
     sp.GetRequiredService<IMapper>()));
 
 builder.Services.AddScoped(s =>

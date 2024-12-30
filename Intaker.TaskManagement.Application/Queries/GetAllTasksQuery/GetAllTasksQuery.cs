@@ -2,7 +2,5 @@
 
 namespace Intaker.TaskManagement.Application.Queries.GetAllTasksQuery
 {
-    public class GetAllTasksQuery : IRequest<IEnumerable<Domain.Models.Task>>
-    {
-    }
+    public class GetAllTasksQuery : IRequest<IEnumerable<Domain.Models.Task>>;
 }

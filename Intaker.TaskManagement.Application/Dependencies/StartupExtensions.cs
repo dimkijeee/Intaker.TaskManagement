@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Intaker.TaskManagement.Application.Dependencies
 {
@@ -7,7 +8,9 @@ namespace Intaker.TaskManagement.Application.Dependencies
         public static IServiceCollection RegisterRequestHandlers(
             this IServiceCollection services)
         {
-            return services.AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(StartupExtensions).Assembly));
+            return services
+                .AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(StartupExtensions).Assembly))
+                .AddValidatorsFromAssembly(typeof(StartupExtensions).Assembly);
         }
 
         public static IServiceCollection RegisterAutomapper(
