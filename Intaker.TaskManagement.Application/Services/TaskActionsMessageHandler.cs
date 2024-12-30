@@ -3,18 +3,24 @@ using Intaker.TaskManagement.Application.Commands.CreateTaskCommand;
 using Intaker.TaskManagement.Application.Commands.UpdateTaskStatusCommand;
 using Intaker.TaskManagement.Domain.Services;
 using Intaker.TaskManagement.Infrastructure.Models;
+using Intaker.TaskManagement.Infrastructure.Notification;
 using Newtonsoft.Json.Linq;
 
 namespace Intaker.TaskManagement.Application.Services
 {
     public class TaskActionsMessageHandler
     {
-        IRepository<Data.Models.Task> _repository;
-        IMapper _mapper;
+        private readonly IRepository<Data.Models.Task> _repository;
+        private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public TaskActionsMessageHandler(IRepository<Data.Models.Task> repository, IMapper mapper)
+        private const string SuccessMessageFormat = "{0}: Success";
+        private const string ErrorMessageFormat = "{0}: Error";
+
+        public TaskActionsMessageHandler(IRepository<Data.Models.Task> repository, INotificationService notificationService, IMapper mapper)
         {
             _repository = repository;
+            _notificationService = notificationService;
             _mapper = mapper;
         }
 
@@ -36,11 +42,10 @@ namespace Intaker.TaskManagement.Application.Services
             }
             catch
             {
-                // TODO: send notification here
-                throw;
+                await _notificationService.Notify(string.Format(ErrorMessageFormat, message.Action.ToString()));
             }
 
-            // TODO: send notification here
+            await _notificationService.Notify(string.Format(SuccessMessageFormat, message.Action.ToString()));
         }
 
         private async Task CreateTask(CreateTaskCommand command)

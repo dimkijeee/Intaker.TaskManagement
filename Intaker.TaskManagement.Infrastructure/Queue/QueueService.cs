@@ -1,8 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
-using Intaker.TaskManagement.Domain.Infrastructure;
 using Intaker.TaskManagement.Infrastructure.Models;
 
-namespace Intaker.TaskManagement.Application.Services
+namespace Intaker.TaskManagement.Infrastructure.Queue
 {
     public class QueueService : IQueueService
     {
