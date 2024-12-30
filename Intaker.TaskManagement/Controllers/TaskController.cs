@@ -1,4 +1,7 @@
-﻿using Intaker.TaskManagement.Domain.Services;
+﻿using Intaker.TaskManagement.Application.Commands.CreateTaskCommand;
+using Intaker.TaskManagement.Application.Commands.UpdateTaskStatusCommand;
+using Intaker.TaskManagement.Application.Queries.GetAllTasksQuery;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Intaker.TaskManagement.API.Controllers
@@ -7,29 +10,31 @@ namespace Intaker.TaskManagement.API.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly ITaskService TaskService;
+        private readonly IMediator _mediator;
 
-        public TaskController(ITaskService _taskService)
+        public TaskController(IMediator mediator)
         {
-            TaskService = _taskService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Domain.Models.Task>> Get()
+        public async Task<ActionResult<IEnumerable<Domain.Models.Task>>> Get()
         {
-            return await TaskService.GetAll();
+            return Ok(await _mediator.Send(new GetAllTasksQuery()));
         }
 
         [HttpPost]
-        public async Task<Domain.Models.Task> Post([FromBody] Domain.Models.Task task)
+        public async Task<ActionResult> Post([FromBody] CreateTaskCommand command)
         {
-            return await TaskService.Create(task);
+            await _mediator.Send(command);
+            return Accepted();
         }
 
-        [HttpPut("{id}")]
-        public async Task<Domain.Models.Task> Put(int id, [FromBody] Domain.Models.Status newStatus)
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] UpdateTaskStatusCommand command)
         {
-            return await TaskService.UpdateStatus(id, newStatus);
+            await _mediator.Send(command);
+            return Accepted();
         }
     }
 }

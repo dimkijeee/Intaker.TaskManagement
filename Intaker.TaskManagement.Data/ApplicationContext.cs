@@ -9,7 +9,7 @@ namespace Intaker.TaskManagement.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\taskmanagement;Database=taskmanagement;Trusted_Connection=True;");
+            optionsBuilder.UseSqlite("Data source=taskmanagement.db");
         }
     }
 }
